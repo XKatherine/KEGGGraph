@@ -141,19 +141,19 @@ class KEGGGraph:
         hola(G_hola)
     
         for idx, n in G_hola.nodes.items():
-            n.label = G.V[idx].label
-            n.label_anchor = G.V[idx].label_anchor
-        edges = [0 for i in range(len(G.E))]
-        for idx, e in enumerate(G.E):
+            n.label = self.V[idx].label
+            n.label_anchor = self.V[idx].label_anchor
+        edges = [0 for i in range(len(self.E))]
+        for idx, e in enumerate(self.E):
             edge = str(e.source) + " --> " + str(e.target)
             edges[idx] = edge
         for idx, n in G_hola.edges.items():
             index = edges.index(idx)
-            n.style = G.E[index].style
-            n.arrow = "last" if G.E[index].direction == 0 else "both"
-            n.source_arrow = G.E[index].source_arrow
-            n.target_arrow = G.E[index].target_arrow
-            gml_out = G_hola.writeGML()
+            n.style = self.E[index].style
+            n.arrow = "last" if self.E[index].direction == 0 else "both"
+            n.source_arrow = self.E[index].source_arrow
+            n.target_arrow = self.E[index].target_arrow
+        gml_out = G_hola.writeGML()
         return gml_out
     
     def save_gml(self):
@@ -191,7 +191,7 @@ class KEGGGraph:
     def graphviz_view(self):
         d = self.to_graphviz()
         d.format = 'png'
-        d.view('output.png')
+        d.view('output')
         d.render()
 
     def __str__(self):
